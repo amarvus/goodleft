@@ -30,10 +30,6 @@ const userSchema = new mongoose.Schema(
         }
       },
     },
-    registrationNumber: {
-      type: String,
-      unique: true,
-    },
     role: {
       type: String,
       enum: ["donor", "accepter"],
