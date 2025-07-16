@@ -5,31 +5,39 @@ const Food = require("../models/food");
 
 const foodRouter = express.Router();
 
-foodRouter.post("/food/create", userAuth, allowRole, async (req, res) => {
-  try {
-    const { name, quantity, expiry, description } = req.body;
-    const loggedInUser = req.user;
+foodRouter.post(
+  "/food/create",
+  userAuth,
+  allowRole("donor"),
+  async (req, res) => {
+    try {
+      const { name, quantity, expiry, description } = req.body;
+      const loggedInUser = req.user;
 
-    const newFood = new Food({
-      name,
-      quantity,
-      expiry,
-      description,
-      donor: loggedInUser.id,
-    });
+      const newFood = new Food({
+        name,
+        quantity,
+        expiry,
+        description,
+        donor: loggedInUser.id,
+      });
 
-    const savedFood = await newFood.save();
+      const savedFood = await newFood.save();
 
-    res.json({ message: "Fodd item added successfully", foodItem: savedFood });
-  } catch (err) {
-    res.status(500).send("Error: Failed to add food ", err.message);
+      res.json({
+        message: "Fodd item added successfully",
+        foodItem: savedFood,
+      });
+    } catch (err) {
+      res.status(500).send("Error: Failed to add food ", err.message);
+    }
   }
-});
+);
 
 foodRouter.patch(
   "/food/edit/:foodId",
   userAuth,
-  allowRole,
+  allowRole("donor"),
   async (req, res) => {
     try {
       const loggedInUser = req.user;
@@ -59,7 +67,7 @@ foodRouter.patch(
 foodRouter.delete(
   "/food/delete/:foodId",
   userAuth,
-  allowRole,
+  allowRole("donor"),
   async (req, res) => {
     try {
       const { foodId } = req.params;
@@ -82,7 +90,7 @@ foodRouter.delete(
   }
 );
 
-foodRouter.get("/food/my", userAuth, allowRole, async (req, res) => {
+foodRouter.get("/food/my", userAuth, allowRole("donor"), async (req, res) => {
   try {
     const loggedInUser = req.user;
 

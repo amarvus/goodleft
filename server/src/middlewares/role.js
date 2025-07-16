@@ -1,16 +1,19 @@
-const allowRole = async (req, res, next) => {
-  try {
-    const loggedInUser = req.user;
+const allowRole = (role) => {
+  return async (req, res, next) => {
+    try {
+      const loggedInUser = res.user;
 
-    const allowedRole = "donor";
-    if (loggedInUser.role !== allowedRole) {
-      return res.status(403).send("Access denied: ONLY FOR DONOR");
+      if (loggedInUser.role !== role) {
+        return res
+          .status(403)
+          .send(`Access denied: Only ${role}s can access this`);
+      }
+
+      next();
+    } catch (err) {
+      res.status(500).send("Role check failed: " + err.message);
     }
-
-    next();
-  } catch (err) {
-    return res.status(500).send("Error: " + err.message);
-  }
+  };
 };
 
 module.exports = { allowRole };
