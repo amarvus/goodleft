@@ -64,3 +64,18 @@ foodRouter.delete("/food/delete/:foodId", userAuth, async (req, res) => {
     res.status(500).send("Failed to delete food: ", err.message);
   }
 });
+
+foodRouter.get("/food/all", userAuth, async (req, res) => {
+  try {
+    const foods = await Food.find({
+      isAvailable: true,
+      expiry: { $gte: new Date() },
+    }).populate("donor", "name");
+
+    res.json({ message: "All food items", foodItems: foods });
+  } catch (err) {
+    res.status(500).send("Failed to fetch food items: " + err.message);
+  }
+});
+
+module.exports = foodRouter;

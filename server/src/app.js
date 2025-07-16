@@ -7,8 +7,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 const authRouter = require("./routes/auth");
+const foodRouter = require("./routes/food");
 
 app.use("/", authRouter);
+app.use("/", foodRouter);
 
 connectDB()
   .then(() => {

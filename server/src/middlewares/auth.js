@@ -11,7 +11,7 @@ const userAuth = async (req, res, next) => {
     const decodeObj = jwt.verify(token, "good@left");
     const { _id } = decodeObj;
 
-    const user = await User.findOne({ _id });
+    const user = await User.findOne(_id);
     if (!user) {
       throw new Error("User does not exist");
     }
@@ -19,7 +19,9 @@ const userAuth = async (req, res, next) => {
     req.user = user;
     next();
   } catch (err) {
-    res.status(400).send("Error: ", err.message);
+    console.log(err.message);
+
+    res.status(400).send("Error: " + err.message);
   }
 };
 
