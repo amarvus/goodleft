@@ -26,6 +26,7 @@ requestRouter.post(
       });
 
       const savedRequest = await newRequset.save();
+
       res.json({ message: "Food request sent", request: savedRequest });
     } catch (err) {
       res.status(500).send("Failed to send food request: " + err.message);
@@ -58,7 +59,7 @@ requestRouter.delete(
   "/request/cancel/:requestId",
   userAuth,
   allowRole("accepter"),
-  async (req) => {
+  async (req, res) => {
     try {
       const loggedInUser = req.user;
       const { requestId } = req.params;
@@ -69,7 +70,7 @@ requestRouter.delete(
       });
 
       if (!deleteRequest) {
-        res.status(404).send("Request not found");
+        return res.status(404).send("Request not found");
       }
 
       res.json({

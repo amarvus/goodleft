@@ -1,7 +1,7 @@
 const allowRole = (role) => {
   return async (req, res, next) => {
     try {
-      const loggedInUser = res.user;
+      const loggedInUser = req.user;
 
       if (loggedInUser.role !== role) {
         return res
