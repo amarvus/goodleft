@@ -2,6 +2,7 @@ const express = require("express");
 const { userAuth } = require("../middlewares/auth");
 const { allowRole } = require("../middlewares/role");
 const Food = require("../models/food");
+const Request = require("../models/request");
 
 const foodRouter = express.Router();
 
@@ -107,6 +108,65 @@ foodRouter.get("/food/my", userAuth, allowRole("donor"), async (req, res) => {
     res.status(500).send("Failed to fetch food items: " + err.message);
   }
 });
+
+foodRouter.get(
+  "/food/request/received",
+  userAuth,
+  allowRole("donor"),
+  async (req, res) => {
+    try {
+      const loggedInUser = req.user;
+      const requests = await Request.find()
+        .populate({
+          path: "food",
+          match: { donor: loggedInUser._id },
+          populate: { path: "donor", select: "name" },
+        })
+        .populate("accepter", "name");
+
+      const foodRequests = requests.filter((request) => request.food !== null);
+      if (!foodRequests) {
+        return res.status(200).send("No food requests received");
+      }
+      res.json({
+        message: "Food requests received by you",
+        foodRequests: foodRequests,
+      });
+    } catch (err) {
+      res.status(500).send("Failed to fetch food requests: " + err.message);
+    }
+  }
+);
+
+foodRouter.post(
+  "/food/request/:review/:requestId",
+  userAuth,
+  allowRole("donor"),
+  async (req, res) => {
+    try {
+      const { requestId } = req.params;
+      const loggedInUser = req.user;
+      const { review } = req.params;
+
+      const request = await Request.findById(requestId).populate("food");
+
+      if (!request || !request.food) {
+        return res.status(404).send("Request not found");
+      }
+
+      if (request.food.donor.toString() !== loggedInUser._id.toString()) {
+        return res.status(403).send("You are not the donor of this food");
+      }
+
+      request.status = review;
+      const savedRequest = await request.save();
+      res.json({ message: "Food request updated", request: savedRequest });
+    } catch (err) {
+      res.status(500).send("Failed to update food request: " + err.message);
+    }
+  }
+);
+
 foodRouter.get("/food/all", userAuth, async (req, res) => {
   try {
     const foods = await Food.find({
