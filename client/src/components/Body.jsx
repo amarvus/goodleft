@@ -7,8 +7,9 @@ import axios from "axios";
 import { addUser } from "../utils/userSlice";
 import Foodcard from "../components/foodcard";
 import Feed from "../components/feed";
+import Footer from "./Footer";
 
-const AccepterDashboard = () => {
+const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -34,9 +35,11 @@ const AccepterDashboard = () => {
 
   return (
     <div>
-      <Feed />
+      <Navbar />
+      <Outlet />
+      <Footer />
     </div>
   );
 };
 
-export default AccepterDashboard;
+export default Body;

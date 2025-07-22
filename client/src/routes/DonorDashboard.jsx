@@ -1,11 +1,7 @@
 import Navbar from "../components/Navbar";
 
 const DonorDashboard = () => {
-  return (
-    <div>
-      <Navbar />
-    </div>
-  );
+  return <div>Donor Dashboard</div>;
 };
 
 export default DonorDashboard;

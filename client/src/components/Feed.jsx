@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Foodcard from "./foodcard";
 import { useEffect } from "react";
 import { addFeed } from "../utils/feedSlice";
+import RequestedFood from "./RequestedFood";
+import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const feed = useSelector((store) => store.feed);
-  console.log(feed);
 
   const getFeed = async () => {
     try {
@@ -34,7 +36,12 @@ const Feed = () => {
     feed && (
       <div>
         <div className="flex justify-end my-10 mx-20">
-          <button className="btn btn-wide bg-gray-300">Requested Food</button>
+          <button
+            className="btn btn-wide bg-gray-300"
+            onClick={() => navigate("/requests")}
+          >
+            Requested Food
+          </button>
         </div>
         <div className="flex justify-between mx-20 mt-10 mb-10">
           {feed.foodItems.map((item) => (

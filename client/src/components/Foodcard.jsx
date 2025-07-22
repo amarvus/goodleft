@@ -5,12 +5,12 @@ const Foodcard = ({ food }) => {
       <div className="card bg-base-200 w-96 shadow-sm">
         <div className="card-body">
           <h2 className="card-title text-4xl font-bold">{name}</h2>
-          <hr></hr>
-          <p className="font-medium">{description}</p>
+
+          <p className="font-medium mt-2">{description}</p>
           <p className="font-medium">Quantity: {quantity}</p>
           <p className="font-medium">Expiry: {expiry}</p>
           <hr></hr>
-          <p className="font-medium">Restaurant: {donor.name}</p>
+          <p className="font-medium text-lg">Restaurant: {donor.name}</p>
 
           <div className="card-actions justify-center mt-3">
             <button className="btn btn-primary shadow-sm btn-wide">
