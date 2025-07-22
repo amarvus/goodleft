@@ -1,7 +1,11 @@
-import React from "react";
+import Navbar from "../components/Navbar";
 
 const DonorDashboard = () => {
-  return <div>heelo from donor dashboard</div>;
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
 };
 
 export default DonorDashboard;

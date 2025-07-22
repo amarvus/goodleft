@@ -20,7 +20,14 @@ const Login = () => {
       );
       //console.log(response.data.user);
       dispatch(addUser(response.data.user));
-      navigate("/dashboard");
+      let role = response.data.user.role;
+      if (role === "donor") {
+        navigate("/donor-dashboard");
+      } else if (role === "accepter") {
+        navigate("/accepter-dashboard");
+      } else {
+        alert("Invaid role");
+      }
     } catch (err) {
       console.error(err);
       alert("Failed to login. Please check your credentials.");
