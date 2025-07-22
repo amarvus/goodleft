@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { API_URI } from "../utils/constants";
 import axios from "axios";
 import { addUser } from "../utils/userSlice";
+import Foodcard from "../components/foodcard";
+import Feed from "../components/feed";
 
 const AccepterDashboard = () => {
   const dispatch = useDispatch();
@@ -33,6 +35,7 @@ const AccepterDashboard = () => {
   return (
     <div>
       <Navbar />
+      <Feed />
     </div>
   );
 };
