@@ -27,7 +27,7 @@ const RequestedFood = () => {
     fetchRequests();
   }, []);
 
-  if (!requests || requests.length === 0)
+  if (!requests || requests.requests.length === 0)
     return <h1 className="text-center my-10">No Requests Found!</h1>;
 
   return (

@@ -21,7 +21,7 @@ const Body = () => {
 
       dispatch(addUser(response.data));
     } catch (err) {
-      if (err.status === 401) {
+      if (err.status === 400) {
         // User is not authenticated, redirect to login
         return navigate("/login");
       }
