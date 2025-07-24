@@ -5,6 +5,7 @@ import Signup from "./pages/auth/Signup";
 import DonorDashboard from "./routes/DonorDashboard";
 import RequestedFood from "./components/RequestedFood";
 import Body from "./components/Body";
+import AddFood from "./components/AddFood";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/accepter-dashboard" element={<AccepterDashboard />} />
             <Route path="/donor-dashboard" element={<DonorDashboard />} />
             <Route path="/requests" element={<RequestedFood />} />
+            <Route path="/food/create" element={<AddFood />} />
           </Route>
         </Routes>
       </BrowserRouter>

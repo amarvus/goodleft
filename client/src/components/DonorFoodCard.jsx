@@ -1,7 +1,13 @@
-import React from "react";
-
 const DonorFoodCard = ({ food }) => {
   const { name, quantity, expiry, description } = food;
+
+  const handleEdit = async () => {
+    // patch
+  };
+
+  const handleDelete = async () => {
+    // delete
+  };
   return (
     <div>
       <div className="card bg-base-200 w-96 shadow-sm">

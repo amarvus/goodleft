@@ -43,7 +43,7 @@ const Feed = () => {
             Requested Food
           </button>
         </div>
-        <div className="flex justify-between mx-20 mt-10 mb-10">
+        <div className="flex flex-wrap gap-6 justify-between mx-20 mt-10 mb-20">
           {feed.foodItems.map((item) => (
             <Foodcard key={item._id} food={item} />
           ))}
