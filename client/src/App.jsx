@@ -6,6 +6,7 @@ import DonorDashboard from "./routes/DonorDashboard";
 import RequestedFood from "./components/RequestedFood";
 import Body from "./components/Body";
 import AddFood from "./components/AddFood";
+import ReceivedRequest from "./components/ReceivedRequest";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/donor-dashboard" element={<DonorDashboard />} />
             <Route path="/requests" element={<RequestedFood />} />
             <Route path="/food/create" element={<AddFood />} />
+            <Route path="/received/requests" element={<ReceivedRequest />} />
           </Route>
         </Routes>
       </BrowserRouter>

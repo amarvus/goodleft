@@ -36,20 +36,19 @@ const DonorFeed = () => {
       <>
         <div className="flex justify-end my-10 mx-20">
           <button
+            className="btn btn-wide bg-gray-300 mx-5"
+            onClick={() => navigate("/received/requests")}
+          >
+            Received Request
+          </button>
+          <button
             className="btn btn-wide bg-gray-300"
             onClick={() => navigate("/food/create")}
           >
             Add Food
           </button>
         </div>
-        <div className="flex justify-end my-10 mx-20">
-          <button
-            className="btn btn-wide bg-gray-300"
-            onClick={() => navigate("/food/create")}
-          >
-            Received Request
-          </button>
-        </div>
+
         <div className="flex flex-wrap gap-6 justify-evenly mx-20 mt-10 mb-10">
           {feed.foodItems.map((item) => (
             <DonorFoodCard key={item._id} food={item} />

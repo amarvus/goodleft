@@ -31,7 +31,7 @@ const RequestedFood = () => {
     return <h1 className="text-center my-10">No Requests Found!</h1>;
 
   return (
-    <div className="flex flex-wrap gap-6 justify-between my-10 mx-20">
+    <div className="flex flex-wrap gap-6 justify-evenly my-10 mx-20">
       {requests.requests.map((request) => (
         <RequestCard key={request._id} requests={request} />
       ))}
