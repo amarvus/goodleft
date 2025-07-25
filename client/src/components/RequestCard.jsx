@@ -9,7 +9,7 @@ const RequestCard = ({ requests }) => {
       axios.delete(API_URI + "/request/cancel/" + requestId, {
         withCredentials: true,
       });
-      alert("Food request canceled");
+      alert("Food request canceled/deleted");
     } catch (err) {
       console.log(requestId);
 
@@ -19,24 +19,26 @@ const RequestCard = ({ requests }) => {
   };
 
   return (
-    <div>
-      <div className="card bg-base-100 w-96 shadow-sm">
-        <div className="card-body">
-          <h2 className="card-title text-4xl font-bold">{food.name}</h2>
-          <p className="font-medium my-5">Staus: {status}</p>
-          <div className="card-actions justify-center">
-            <button
-              className="btn btn-error btn-wide"
-              onClick={() => {
-                handleCancelRequest(_id);
-              }}
-            >
-              Cancel
-            </button>
+    food && (
+      <div>
+        <div className="card bg-base-100 w-96 shadow-sm">
+          <div className="card-body">
+            <h2 className="card-title text-4xl font-bold">{food.name}</h2>
+            <p className="font-medium my-5">Staus: {status}</p>
+            <div className="card-actions justify-center">
+              <button
+                className="btn btn-error btn-wide"
+                onClick={() => {
+                  handleCancelRequest(_id);
+                }}
+              >
+                Cancel/Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    )
   );
 };
 

@@ -8,7 +8,6 @@ import ReceivedRequestCard from "./ReceivedRequestCard";
 const ReceivedRequest = () => {
   const dispatch = useDispatch();
   const requests = useSelector((store) => store.receivedRequests);
-  console.log(requests);
 
   const fetchRequest = async () => {
     try {

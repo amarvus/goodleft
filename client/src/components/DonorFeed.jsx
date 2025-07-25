@@ -11,6 +11,7 @@ const DonorFeed = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const feed = useSelector((store) => store.feed);
+
   const getFeed = async () => {
     try {
       const response = await axios.get(API_URI + "/food/my", {

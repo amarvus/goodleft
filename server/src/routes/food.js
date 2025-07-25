@@ -158,6 +158,12 @@ foodRouter.post(
         return res.status(403).send("You are not the donor of this food");
       }
 
+      if (request.status !== "pending") {
+        return res
+          .status(400)
+          .send(`Request already ${request.status}. Cannot change again.`);
+      }
+
       request.status = review;
       const savedRequest = await request.save();
       res.json({ message: "Food request updated", request: savedRequest });
@@ -179,5 +185,22 @@ foodRouter.get("/food/all", userAuth, async (req, res) => {
     res.status(500).send("Failed to fetch food items: " + err.message);
   }
 });
+
+foodRouter.get(
+  "/get/food/:foodId",
+  userAuth,
+  allowRole("donor"),
+  async (req, res) => {
+    try {
+      const { foodId } = req.params;
+
+      const getFood = await Food.find({ _id: foodId });
+
+      res.json({ message: "Food item fetched successfully", Item: getFood });
+    } catch (err) {
+      res.status(500).send("Failed to fetch food items: " + err.message);
+    }
+  }
+);
 
 module.exports = foodRouter;

@@ -7,6 +7,7 @@ import RequestedFood from "./components/RequestedFood";
 import Body from "./components/Body";
 import AddFood from "./components/AddFood";
 import ReceivedRequest from "./components/ReceivedRequest";
+import EditFood from "./components/EditFood";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/requests" element={<RequestedFood />} />
             <Route path="/food/create" element={<AddFood />} />
             <Route path="/received/requests" element={<ReceivedRequest />} />
+            <Route path="/food/edit/:id" element={<EditFood />} />
           </Route>
         </Routes>
       </BrowserRouter>
